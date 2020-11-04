@@ -1,0 +1,51 @@
+version: v1beta9
+images:
+  app1:
+    image: devspace1
+    preferSyncOverRebuild: true
+    injectRestartHelper: true
+    appendDockerfileInstructions:
+      - USER root
+    build:
+      docker:
+        skipPush: true
+  app2:
+    image: devspace2
+    preferSyncOverRebuild: true
+    injectRestartHelper: true
+    appendDockerfileInstructions:
+      - USER root
+    build:
+      docker:
+        skipPush: true
+deployments:
+  - name: devspace-container-log-bug
+    helm:
+      componentChart: true
+      values:
+        containers:
+          - image: devspace1
+          - image: devspace2
+            env:
+              - name: APP_PORT
+                value: "3001"
+dev:
+  sync:
+    - imageName: app1
+      excludePaths:
+        - .git/
+      uploadExcludePaths:
+        - Dockerfile
+        - node_modules/
+        - devspace.yaml
+      onUpload:
+        restartContainer: true
+    - imageName: app2
+      excludePaths:
+        - .git/
+      uploadExcludePaths:
+        - Dockerfile
+        - node_modules/
+        - devspace.yaml
+      onUpload:
+        restartContainer: true
