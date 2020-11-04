@@ -1,6 +1,6 @@
 # Container log streaming bug in Devspace 5.2
 
-If you your Kubernetes Deployment contains multiple containers started from images
+If your Kubernetes Deployment contains multiple containers started from images
 defined in devspace.yaml then `devspace dev` starts to stream logs only from one of
 the containers.
 
