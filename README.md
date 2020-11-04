@@ -16,5 +16,5 @@ the containers.
 
 ## Expected result
 
-After a developer starts `devspace dev` then all the logs from different containers (even if they are in the same deployment)
+After a developer starts `devspace dev` then all the logs from different containers (even if they are in the same pod)
 should be shown in the log stream.
